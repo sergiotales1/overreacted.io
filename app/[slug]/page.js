@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote-client/rsc";
 import Link from "../Link";
 import { sans } from "../fonts";
 import remarkSmartpants from "remark-smartypants";
+import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -29,10 +30,10 @@ export default async function PostPage({ params }) {
   let Wrapper = postComponents.Wrapper ?? Fragment;
   const { content, data } = matter(file);
   const discussUrl = `https://bsky.app/search?q=${encodeURIComponent(
-    `https://overreacted.io/${slug}/`,
+    `https://overreacted.io/${slug}/`
   )}`;
   const editUrl = `https://github.com/gaearon/overreacted.io/edit/main/public/${encodeURIComponent(
-    slug,
+    slug
   )}/index.md`;
   return (
     <>
@@ -80,6 +81,7 @@ export default async function PostPage({ params }) {
                   useDynamicImport: true,
                   remarkPlugins: [
                     remarkSmartpants,
+                    remarkGfm,
                     [remarkMdxEvalCodeBlock, filename],
                   ],
                   rehypePlugins: [
